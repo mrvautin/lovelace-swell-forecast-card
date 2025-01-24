@@ -119,7 +119,7 @@ class SwellForecastCard extends LitElement {
               <div class="day" @click=${() => this._handleClick(entity)}>
                 <div class="dayname">
                   ${
-                    new Date(entity.attributes.forecastDate).toLocaleDateString()}
+                    new Date(entity.attributes.forecastDate).toLocaleDateString(undefined, { day: 'numeric', month: 'numeric' })}
                 </div>
                 <div class="score" style="color: ${this.getScoreColor(entity.attributes.optimalScore)} !important;">
                   ${entity.attributes.humanRelation}
