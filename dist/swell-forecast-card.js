@@ -50,7 +50,7 @@ function hasConfigOrEntityChanged(element, changedProps) {
   return true;
 }
 
-class ForecastCard extends LitElement {
+class SwellForecastCard extends LitElement {
   static get properties() {
     return {
       _config: {},
@@ -243,4 +243,4 @@ class ForecastCard extends LitElement {
     `;
   }
 }
-customElements.define("forecast-card", ForecastCard);
+customElements.define("swell-forecast-card", SwellForecastCard);
