@@ -13,11 +13,11 @@ const scoreColours = {
 
 window.customCards = window.customCards || [];
 window.customCards.push({
-  type: "forecast-card",
-  name: "Forecast Card",
-  description: "A custom forecast card.",
+  type: "swell-forecast-card",
+  name: "Swell forecast Card",
+  description: "A custom card for Swell forecast.",
   preview: true,
-  documentationURL: "https://github.com/mrvautin/lovelace-forecast-card",
+  documentationURL: "https://github.com/mrvautin/lovelace-swell-forecast-card",
 });
 
 const fireEvent = (node, type, detail, options) => {
