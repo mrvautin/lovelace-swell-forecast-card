@@ -104,7 +104,7 @@ class SwellForecastCard extends LitElement {
     this.numberElements++;
     return html`
       ${config.title
-      ? html` <div class="title box"> ${config.title} <img src="/local/community/lovelace-forecast-card/logo.png" class="title-icon" /></div>`
+      ? html` <div class="title box"> ${config.title} <img src="/hacsfiles/lovelace-swell-forecast-card/logo.png" class="title-icon" /></div>`
       : ""}
       <div class="forecast clear ${this.numberElements > 1 ? "spacer" : ""}">
         ${config.entityStates
