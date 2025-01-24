@@ -198,6 +198,7 @@ class SwellForecastCard extends LitElement {
       }
 
       .title-icon {
+        padding-left: 10px;
         height: 35px;
       }
 
