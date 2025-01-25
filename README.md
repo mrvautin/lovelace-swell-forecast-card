@@ -6,6 +6,10 @@
 
 This project provides a Home Assistant HACS card for the [Swell Forecast](https://github.com/mrvautin/hacs-beach-swell-forecast) integration.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mrvautin/lovelace-swell-forecast-card/refs/heads/main/dist/screenshot.png" height="200px" />
+</p>
+
 ## Installation
 
 - In `HACS` > `3 dots` > `Custom Repositories`.
