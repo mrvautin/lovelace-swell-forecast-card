@@ -1,7 +1,7 @@
 # Swell Forecast Card
 
 <p align="center">
-  <img src="./dist/logo.png" height="150px" />
+  <img src="https://raw.githubusercontent.com/mrvautin/lovelace-swell-forecast-card/refs/heads/main/dist/logo.png" height="150px" />
 </p>
 
 This project provides a Home Assistant HACS card for the [Swell Forecast](https://github.com/mrvautin/hacs-beach-swell-forecast) integration.
