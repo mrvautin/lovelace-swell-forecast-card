@@ -119,16 +119,10 @@ class SwellForecastCard extends LitElement {
               <div class="day" @click=${() => this._handleClick(entity)}>
                 <div class="dayname">
                   ${
-                    new Date(entity.attributes.forecastDate).toLocaleDateString(undefined, { day: 'numeric', month: 'numeric' })}
+                    new Date(entity.state).toLocaleDateString(undefined, { day: 'numeric', month: 'numeric' })}
                 </div>
-                <div class="score" style="color: ${this.getScoreColor(entity.attributes.optimalScore)} !important;">
-                  ${entity.attributes.humanRelation}
-                </div>
-                <div class="labels">
-                  Min / Max
-                </div>
-                <div class="max">
-                  ${this.getMinMax(config, entity)}
+                <div class="score" style="color: ${this.getScoreColor(entity.attributes.optimal_wave.max_wave_height)} !important;">
+                  ${entity.attributes.optimal_wave.max_wave}
                 </div>
               </div>
             `
