@@ -3,19 +3,22 @@ const html = LitElement.prototype.html;
 const css = LitElement.prototype.css;
 
 const scoreColours = {
-  0: "#ef476f",
-  1: "#ffd166",
-  2: "#06d6a0",
-  3: "#118ab2",
-  4: "#073b4c",
-  5: "#38b000"
+  1: "#d29ce3",
+  2: "#a538c6",
+  3: "#001eba",
+  4: "#33a7c8",
+  5: "#31d5c8",
+  6: "#05fb00",
+  7: "#fff500",
+  8: "#ff6100",
+  9: "#e90000"
 }
 
 window.customCards = window.customCards || [];
 window.customCards.push({
   type: "swell-forecast-card",
-  name: "Swell forecast Card",
-  description: "A custom card for Swell forecast.",
+  name: "Swell Forecast Card",
+  description: "A custom card for Swell Forecast.",
   preview: true,
   documentationURL: "https://github.com/mrvautin/lovelace-swell-forecast-card",
 });
@@ -87,13 +90,25 @@ class SwellForecastCard extends LitElement {
       entityStates.push(this.hass.states[this.cardConfig.entities[i]])
     }
     this.cardConfig.entityStates = entityStates;
+    if(this._config.current){
+      this.cardConfig.currentState= this.hass.states[this.cardConfig.current]
+    }
 
     return html`
       <ha-card>
+        ${this.renderTitle(this.cardConfig)}
+        ${this.renderCurrentDay(this.cardConfig)}
         ${this.renderForecast(this.cardConfig, lang)}
       </ha-card>
     `;
+  }
 
+  renderTitle(config) {
+    return html `
+      ${config.title
+      ? html` <div class="title box"> ${config.title} <img src="/hacsfiles/lovelace-swell-forecast-card/logo.png" class="title-icon" /></div>`
+      : ""}
+    `;
   }
 
   renderForecast(config, lang) {
@@ -103,9 +118,7 @@ class SwellForecastCard extends LitElement {
 
     this.numberElements++;
     return html`
-      ${config.title
-      ? html` <div class="title box"> ${config.title} <img src="/hacsfiles/lovelace-swell-forecast-card/logo.png" class="title-icon" /></div>`
-      : ""}
+      
       <div class="forecast clear ${this.numberElements > 1 ? "spacer" : ""}">
         ${config.entityStates
           .slice(
@@ -119,14 +132,43 @@ class SwellForecastCard extends LitElement {
               <div class="day" @click=${() => this._handleClick(entity)}>
                 <div class="dayname">
                   ${
-                    new Date(entity.state).toLocaleDateString(undefined, { day: 'numeric', month: 'numeric' })}
+                    new Date(entity.attributes.updated).toLocaleDateString(undefined, { day: 'numeric', month: 'numeric' })}
                 </div>
-                <div class="score" style="color: ${this.getScoreColor(entity.attributes.optimal_wave.max_wave_height)} !important;">
+                <div class="score" style="background-color: ${this.getScoreColor(entity.attributes.optimal_wave.wave_score.score)} !important; text-color: "#ffffff">
+                  ${entity.attributes.optimal_wave.wave_score.score}
+                </div>
+                <div class="wave-details">
                   ${entity.attributes.optimal_wave.max_wave}
                 </div>
               </div>
             `
           )}
+      </div>
+    `;
+  }
+
+  renderCurrentDay(config, lang) {
+    if (!config || !config.currentState) {
+      return html``;
+    }
+
+    const options = {
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    };
+  
+    const date = new Date(config.currentState.attributes.current_time);
+    const localTime = date.toLocaleString('en-AU', options);
+
+    return html`
+      <div class="current_conditions_heading">
+        Current conditions: 
+      </div>
+      <div class="current_conditions">
+        <p><i>${localTime}</i> - <strong>Height: ${config.currentState.attributes.wave_height}${config.currentState.attributes.wave_metric}</strong></p>
       </div>
     `;
   }
@@ -141,7 +183,7 @@ class SwellForecastCard extends LitElement {
   }
 
   getScoreColor(score) {
-    const scoreColour = scoreColours[Math.floor(score)];
+    const scoreColour = scoreColours[score];
     return scoreColour || "#dddddd";
   }
 
@@ -167,7 +209,14 @@ class SwellForecastCard extends LitElement {
       }
 
       .score {
-        font-size: 1em;
+        font-size: 1.8em;
+        border-radius: 50%;
+        height: 40px;
+        margin-left: 5px;
+        margin-right: 5px;
+        background-color: #43b0f1;
+        line-height: 15px;
+        padding-top: 25px;
       }
 
       .spacer {
@@ -182,7 +231,6 @@ class SwellForecastCard extends LitElement {
         left: 3em;
         font-weight: 400;
         font-size: 2em;
-        padding-bottom: .5em;
         color: var(--primary-text-color);
       }
 
@@ -223,6 +271,12 @@ class SwellForecastCard extends LitElement {
         box-sizing: border-box;
       }
 
+      .wave-details {
+        padding-top: 5px;
+        font-weight: 700;
+        line-height: 20px;
+      }
+
       .dayname {
         text-transform: uppercase;
       }
@@ -235,6 +289,24 @@ class SwellForecastCard extends LitElement {
         border-right: none;
         margin-right: 0;
       }
+
+      .current_conditions_heading {
+        padding-top: 10px;
+        padding-bottom: 5px;
+        text-align: left;
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      .current_conditions {
+        text-align: left;
+        font-size: 16px;
+        padding-bottom: 10px;
+      }
+
+      .current_conditions p {
+        margin: 0;
+      } 
     `;
   }
 }

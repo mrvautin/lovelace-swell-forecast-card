@@ -19,13 +19,14 @@ This project provides a Home Assistant HACS card for the [Swell Forecast](https:
 
 ## Usage
 
-Create a new card, in `Search cards` type enter `Custom` and select `Custom: Swell forecast card`.
+Create a new card, in `Search cards` type enter `Custom` and select `Custom: Swell Forecast Card`.
 
 You will then want to enter the following `yaml` ensuring you change the `title` and your sensor `entities`.
 
 ``` yaml
 type: custom:swell-forecast-card
-title: Kirra Beach
+title: Southport Beach, SA
+current: sensor.<location_name>_current
 entities:
   - sensor.<location_name>_day1_forecast
   - sensor.<location_name>_day2_forecast
