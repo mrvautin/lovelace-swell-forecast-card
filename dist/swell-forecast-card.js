@@ -116,6 +116,18 @@ class SwellForecastCard extends LitElement {
       return html``;
     }
 
+    // Setup the scale
+    const scale = config.scale;
+    const scales = [ 'face', 'douglas'];
+    let scale_key = 'face_scale';
+    if(scale){
+      if(scales.includes(scale)){
+        scale_key = `${scale}_scale`;
+      }else{
+        console.log('Invalid scale supplied. Allowed values: face, douglas')
+      }
+    }
+
     this.numberElements++;
     return html`
       
@@ -134,9 +146,9 @@ class SwellForecastCard extends LitElement {
                   ${
                     new Date(entity.attributes.updated).toLocaleDateString(undefined, { day: 'numeric', month: 'numeric' })}
                 </div>
-                <div class="score" style="background-color: ${this.getScoreColor(entity.attributes.optimal_wave.wave_score.score)} !important;">
-                  <div class="score_num">${entity.attributes.optimal_wave.wave_score.score}</div></br>
-                  <div class="score_desc">${entity.attributes.optimal_wave.wave_score.desc}</div>
+                <div class="score" style="background-color: ${this.getScoreColor(entity.attributes.optimal_wave.wave_score[scale_key].score)} !important;">
+                  <div class="score_num">${entity.attributes.optimal_wave.wave_score[scale_key].score}</div></br>
+                  <div class="score_desc">${entity.attributes.optimal_wave.wave_score[scale_key].description}</div>
                 </div>
                 <div class="wave-details">
                   ${entity.attributes.optimal_wave.max_wave}
@@ -238,7 +250,7 @@ class SwellForecastCard extends LitElement {
       .title {
         left: 3em;
         font-weight: 400;
-        font-size: 2em;
+        font-size: 1.8em;
         color: var(--primary-text-color);
       }
 
