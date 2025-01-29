@@ -36,11 +36,11 @@ entities:
   - sensor.<location_name>_day5_forecast
 ```
 
-`type` = Must be set to `custom:swell-forecast-card`
-`title` = The title for the card. Optional.
-`current` = The sensor for the current conditions. Optional.
-`scale`: Can be either `face` or `douglas`. Optional: Defaults to `face`
-`entities` = An array of sensors you want to display the forecast for. Max 5 entities
+- `type` = Must be set to `custom:swell-forecast-card`
+- `title` = The title for the card. Optional.
+- `current` = The sensor for the current conditions. Optional.
+- `scale`: Can be either `face` or `douglas`. Optional: Defaults to `face`
+- `entities` = An array of sensors you want to display the forecast for. Max 5 entities
 
 ## Scale types
 
