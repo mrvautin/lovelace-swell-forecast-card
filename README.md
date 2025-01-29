@@ -27,6 +27,7 @@ You will then want to enter the following `yaml` ensuring you change the `title`
 type: custom:swell-forecast-card
 title: Southport Beach, SA
 current: sensor.<location_name>_current
+scale: face
 entities:
   - sensor.<location_name>_day1_forecast
   - sensor.<location_name>_day2_forecast
@@ -34,6 +35,19 @@ entities:
   - sensor.<location_name>_day4_forecast
   - sensor.<location_name>_day5_forecast
 ```
+
+`type` = Must be set to `custom:swell-forecast-card`
+`title` = The title for the card. Optional.
+`current` = The sensor for the current conditions. Optional.
+`scale`: Can be either `face` or `douglas`. Optional: Defaults to `face`
+`entities` = An array of sensors you want to display the forecast for. Max 5 entities
+
+## Scale types
+
+There are a few scales to determine a wave size. Swell forecast supports `face` and `douglas` scale. 
+
+`Face` scale is a relative scale to a general humans height. 
+`Douglas` scale is a descriptive scale based on the wave height.
 
 ## Contributing
 
