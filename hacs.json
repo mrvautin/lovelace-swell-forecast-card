@@ -2,5 +2,6 @@
   "name": "Swell Forecast Card",
   "render_readme": true,
   "filename": "swell-forecast-card.js",
+  "version": "0.0.1",
   "country": []
 }
