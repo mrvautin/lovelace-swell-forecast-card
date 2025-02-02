@@ -146,9 +146,9 @@ class SwellForecastCard extends LitElement {
                   ${
                     new Date(entity.attributes.updated).toLocaleDateString(undefined, { day: 'numeric', month: 'numeric' })}
                 </div>
-                <div class="score" style="background-color: ${this.getScoreColor(entity.attributes.optimal_wave.wave_score[scale_key].score)} !important;">
-                  <div class="score_num">${entity.attributes.optimal_wave.wave_score[scale_key].score}</div></br>
-                  <div class="score_desc">${entity.attributes.optimal_wave.wave_score[scale_key].description}</div>
+                <div class="score" style="background-color: ${this.getScoreColor(entity.attributes.optimal_wave.wave.score[scale_key].score)} !important;">
+                  <div class="score_num">${entity.attributes.optimal_wave.wave.score[scale_key].score}</div></br>
+                  <div class="score_desc">${entity.attributes.optimal_wave.wave.score[scale_key].description}</div>
                 </div>
                 <div class="wave-details">
                   ${entity.attributes.optimal_wave.max_wave}
@@ -226,13 +226,15 @@ class SwellForecastCard extends LitElement {
         height: 40px;
         margin-left: 5px;
         margin-right: 5px;
-        line-height: 12px;
+        line-height: 10px;
         padding-top: 15px;
         padding-bottom: 5px;
+        color: white;
       }
 
       .score_num {
-        font-size: 1.8em;
+        font-size: 1.5em;
+        color: white;
       }
 
       .score_desc {
